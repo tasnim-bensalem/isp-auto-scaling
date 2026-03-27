@@ -4,8 +4,8 @@
 Plateforme d'auto-scaling prédictif utilisant le Machine Learning pour ajuster automatiquement les ressources Kubernetes.
 
 ## Équipe
-- Personne A
-- Personne B
+- tasnim ben salem
+- chaima ezzine
 
 ## Technologies
 - Kubernetes
