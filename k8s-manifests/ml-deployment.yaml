@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-prediction-service
+  namespace: default
+  labels:
+    app: ml-prediction-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-prediction-service
+  template:
+    metadata:
+      labels:
+        app: ml-prediction-service
+    spec:
+      containers:
+      - name: ml-prediction-service
+        image: isp-ml-service:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8001
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8001
+          initialDelaySeconds: 10
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ml-prediction-service
+  namespace: default
+spec:
+  selector:
+    app: ml-prediction-service
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8001
+  type: ClusterIP
