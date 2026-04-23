@@ -27,3 +27,4 @@ Thumbs.db
 *.env
 .env.localc
 minikube-linux-amd64
+minikube-linux-amd64
